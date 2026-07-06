@@ -1,0 +1,13 @@
+.env
+venv/
+__pycache__/
+*.pyc
+
+input_videos/
+extracted_frames/
+exports/
+models/
+archive/
+
+.agents/
+.vscode/

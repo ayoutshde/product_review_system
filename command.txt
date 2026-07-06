@@ -1,0 +1,17 @@
+cd C:\Users\Acer\Desktop\internship\product_review_system
+venv\Scripts\activate
+python -c "import torch; print('Torch:', torch.__version__); print('CUDA available:', torch.cuda.is_available()); print('GPU:', torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'No GPU')"
+python -c "from ultralytics import YOLO; model=YOLO('models/best.pt'); print('model loaded')"
+python -m src.db.test_db → PostgreSQL database connection шалгана
+python -m src.db.init_db → PostgreSQL table-үүдийг үүсгэнэ
+python -m py_compile src/annotation_app_db.py src/export_yolo_obb_db.py src/extract_frames_db.py src/run_inference_db.py src/create_queues_db.py src/video_loader.py src/db/database.py src/db/models.py
+→ Python file-үүдийн syntax error байгаа эсэхийг шалгана
+python -m src.extract_frames_db → Input video-нуудыг frame болгон задалж, frame path-уудыг database-д хадгална
+python -m src.run_inference_db --conf 0.25 → YOLO OBB inference ажиллуулж, prediction result-ийг PostgreSQL-д хадгална
+python -m src.create_queues_db --filter-conf 0.70 → Prediction дээр үндэслэж review/annotation queue үүсгэнэ
+uvicorn src.annotation_app_db:app --reload → FastAPI web annotation UI server асаана
+ http://127.0.0.1:8000
+python -m src.export_yolo_obb_db --order-code 260617174721960471752 --camera camera1 --include-empty-labels --zip
+→ Нэг order + нэг camera-г YOLO OBB dataset ZIP болгон export хийнэ
+python -m src.export_yolo_obb_db --include-empty-labels --zip → Бүх saved annotation-уудыг YOLO OBB dataset ZIP болгон export хийнэ
+explorer exports→ Export гарсан folder-ийг нээнэ

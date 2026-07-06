@@ -1,0 +1,13 @@
+{
+  "input_video_dir": "input_videos",
+  "model_path": "models/best.pt",
+  "extracted_frames_dir": "extracted_frames",
+  "inference_results_dir": "inference_results",
+  "annotation_queue_dir": "annotation_queue",
+  "review_queue_dir": "review_queue",
+  "annotations_dir": "annotations",
+  "exports_dir": "exports",
+  "confidence_threshold": 0.70,
+  "class_name": "product",
+  "supported_video_extensions": [".mp4", ".avi", ".mov", ".mkv"]
+}
